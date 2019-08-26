@@ -1,9 +1,11 @@
 from RPLCD.i2c import CharLCD
 import time
+import os
 from time import sleep
 from pydub import AudioSegment
 from pydub.playback import play
-song = AudioSegment.from_wav("sad.wav")
+fileName = os.path.abspath('script/sad.wav')
+song = AudioSegment.from_wav(fileName)
 lcd = CharLCD('PCF8574', 0x27)
 empty = (
     0b00000,

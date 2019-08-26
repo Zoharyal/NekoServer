@@ -4,6 +4,7 @@
 from RPLCD.i2c import CharLCD
 import RPi.GPIO as GPIO
 import time
+import os
 from time import sleep
 from pydub import AudioSegment
 from pydub.playback import play
@@ -13,7 +14,8 @@ class AngryFace:
         ledRedPin = 13      #define 3 pins of RGBLED
         ledGreenPin = 16
         ledBluePin = 37
-        song = AudioSegment.from_wav("sad.wav")
+        fileName = os.path.abspath('script/sad.wav')
+        song = AudioSegment.from_wav(fileName)
         global p_Red,p_Green,p_Blue
         GPIO.setmode(GPIO.BOARD)
         def destroy():

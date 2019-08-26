@@ -7,7 +7,7 @@ const socket = require('./socket/socket');
 const path = require('path');
 const cmd = require('node-cmd');
 const {spawn} = require('child_process');
-const forever = require('forever');
+const {pythonShell} = require('python-shell');
 // const http = require('http').createServer(app);
 // const io = require('socket.io')(http);
 let server;
@@ -34,12 +34,54 @@ const io = socket.getInstance();
 
 io.on('connection', function(socket) {
     console.log('connected');
-    console.log('test eat');
+    function runScript(script) {
+        return spawn('python', ["-u", path.join(__dirname, `/script/${script}`)]);
+    }
     // const spawn = require('child_process').spawn;
     socket.on('eat', () => {
         //script python
+        // const subprocess = runScript('Shower.py');
+        // subprocess.stdout.on('data', (data) => {
+        //     console.log(`data:${data}`);
+        //   });
+        //   subprocess.stderr.on('data', (data) => {
+        //     console.log(`error:${data}`);
+        //   });
+        //   subprocess.stderr.on('close', () => {
+        //     console.log("Closed");
+        //   });
+        console.log('test eat');
         const file = path.join(__dirname, '/script/Shower.py');
-        console.log(file);
+        pythonShell.run(file, null, function (err) {
+            if (err) throw err;
+            console.log('finished');
+        });
+    });
+    // dormir
+    socket.on('sleep', () => {
+        //script python
+        // const subprocess = runScript('Shower.py');
+        // subprocess.stdout.on('data', (data) => {
+        //     console.log(`data:${data}`);
+        //   });
+        //   subprocess.stderr.on('data', (data) => {
+        //     console.log(`error:${data}`);
+        //   });
+        //   subprocess.stderr.on('close', () => {
+        //     console.log("Closed");
+        //   });
+        console.log('test sleep');
+        const file = path.join(__dirname, '/script/Shower.py');
+        pythonShell.run(file, null, function (err) {
+            if (err) throw err;
+            console.log('finished');
+        });
+    });
+    // se laver
+    socket.on('wash', () => {
+        console.log('test wash');
+        // const file = path.join(__dirname, '/script/Shower.py');
+        // console.log(file);
         // const eatPython = cmd.get(`python ${file}`, 
         // function(data, err, stderr) {
         //     if(!err) {
@@ -48,44 +90,11 @@ io.on('connection', function(socket) {
         //         console.log('error', err);
         //     }
         // })
-        const childProcess = require('child_process');
-        childProcess.exec(`python ${file}`, function(err){
-            if (err) {
-                console.log('error', err);
-            }
-        })
-    });
-    // dormir
-    socket.on('sleep', () => {
-        //script python
-        function runScript() {
-            return spawn('python', ["-u", path.join(__dirname, '/script/Shower.py')]);
-        }
-        const subprocess = runScript();
-        subprocess.stdout.on('data', (data) => {
-            console.log(`data:${data}`);
-          });
-          subprocess.stderr.on('data', (data) => {
-            console.log(`error:${data}`);
-          });
-          subprocess.stderr.on('close', () => {
-            console.log("Closed");
-          });
-        console.log('test sleep');
-    });
-    // se laver
-    socket.on('wash', () => {
         const file = path.join(__dirname, '/script/Shower.py');
-        console.log(file);
-        const eatPython = cmd.get(`python ${file}`, 
-        function(data, err, stderr) {
-            if(!err) {
-                console.log('working', data);
-            } else {
-                console.log('error', err);
-            }
-        })
-        console.log('test wash');
+        pythonShell.run(file, null, function (err) {
+            if (err) throw err;
+            console.log('finished');
+        });
     });
     // aller au toilette
     socket.on('toilet', () => {
@@ -101,6 +110,16 @@ io.on('connection', function(socket) {
     // danser
     socket.on('danse', () => {
         //script python
+        const subprocess = runScript('LaunchDance.py');
+        subprocess.stdout.on('data', (data) => {
+            console.log(`data:${data}`);
+          });
+          subprocess.stderr.on('data', (data) => {
+            console.log(`error:${data}`);
+          });
+          subprocess.stderr.on('close', () => {
+            console.log("Closed");
+          });
         console.log('test danse');
     });
     // jouer
