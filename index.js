@@ -4,6 +4,8 @@ const cors = require('cors');
 const app = express();
 const router = require('./router/route');
 const socket = require('./socket/socket');
+const path = require('path');
+const cmd = require('node-cmd');
 // const http = require('http').createServer(app);
 // const io = require('socket.io')(http);
 let server;
@@ -21,20 +23,29 @@ app.use(cors({
     origin: '*'
 }));
 
-server = app.listen(3000, () => {
-    console.log('listening on 3000');
+server = app.listen(8080, () => {
+    console.log('listening on 8080');
 });
 socket.initSocket(server);
 
 const io = socket.getInstance();
 
 io.on('connection', function(socket) {
-    console.log('user connected');
-
-    // donner à manger
+    console.log('connected');
+    console.log('test eat');
+    // const spawn = require('child_process').spawn;
     socket.on('eat', () => {
         //script python
-        console.log('test eat');
+        const file = __dirname + '/script/Feed.py';
+        console.log(file);
+        const eatPython = cmd.get(`python ${file}`, 
+        function(data, err, stderr) {
+            if(!err) {
+                console.log('working', data);
+            } else {
+                console.log('error', err);
+            }
+        })
     });
     // dormir
     socket.on('sleep', () => {
