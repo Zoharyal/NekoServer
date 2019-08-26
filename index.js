@@ -36,7 +36,7 @@ io.on('connection', function(socket) {
     // const spawn = require('child_process').spawn;
     socket.on('eat', () => {
         //script python
-        const file = __dirname + '/script/Feed.py';
+        const file = __dirname + '/script/Shower.py';
         console.log(file);
         // const eatPython = cmd.get(`python ${file}`, 
         // function(data, err, stderr) {
