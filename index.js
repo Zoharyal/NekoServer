@@ -23,7 +23,7 @@ app.use(cors({
     origin: '*'
 }));
 
-server = app.listen(8080, () => {
+server = app.listen(3000, () => {
     console.log('listening on 8080');
 });
 socket.initSocket(server);
@@ -54,7 +54,16 @@ io.on('connection', function(socket) {
     });
     // se laver
     socket.on('wash', () => {
-        //script python
+        const file = __dirname + '/script/Shower.py';
+        console.log(file);
+        const eatPython = cmd.get(`python ${file}`, 
+        function(data, err, stderr) {
+            if(!err) {
+                console.log('working', data);
+            } else {
+                console.log('error', err);
+            }
+        })
         console.log('test wash');
     });
     // aller au toilette
