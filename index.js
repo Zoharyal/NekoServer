@@ -6,6 +6,8 @@ const router = require('./router/route');
 const socket = require('./socket/socket');
 const path = require('path');
 const cmd = require('node-cmd');
+const {spawn} = require('child_process');
+const forever = require('forever');
 // const http = require('http').createServer(app);
 // const io = require('socket.io')(http);
 let server;
@@ -36,7 +38,7 @@ io.on('connection', function(socket) {
     // const spawn = require('child_process').spawn;
     socket.on('eat', () => {
         //script python
-        const file = __dirname + '/script/Shower.py';
+        const file = path.join(__dirname, '/script/Shower.py');
         console.log(file);
         // const eatPython = cmd.get(`python ${file}`, 
         // function(data, err, stderr) {
@@ -56,11 +58,24 @@ io.on('connection', function(socket) {
     // dormir
     socket.on('sleep', () => {
         //script python
+        function runScript() {
+            return spawn('python', ["-u", path.join(__dirname, '/script/Shower.py')]);
+        }
+        const subprocess = runScript();
+        subprocess.stdout.on('data', (data) => {
+            console.log(`data:${data}`);
+          });
+          subprocess.stderr.on('data', (data) => {
+            console.log(`error:${data}`);
+          });
+          subprocess.stderr.on('close', () => {
+            console.log("Closed");
+          });
         console.log('test sleep');
     });
     // se laver
     socket.on('wash', () => {
-        const file = __dirname + '/script/Shower.py';
+        const file = path.join(__dirname, '/script/Shower.py');
         console.log(file);
         const eatPython = cmd.get(`python ${file}`, 
         function(data, err, stderr) {
@@ -74,7 +89,8 @@ io.on('connection', function(socket) {
     });
     // aller au toilette
     socket.on('toilet', () => {
-        //script python
+        //script pyth
+        const file = path.join(__dirname, '/script/Shower.py');
         console.log('test toilet');
     });
     // se réveiller
