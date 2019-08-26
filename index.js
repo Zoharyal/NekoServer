@@ -38,11 +38,17 @@ io.on('connection', function(socket) {
         //script python
         const file = __dirname + '/script/Feed.py';
         console.log(file);
-        const eatPython = cmd.get(`python ${file}`, 
-        function(data, err, stderr) {
-            if(!err) {
-                console.log('working', data);
-            } else {
+        // const eatPython = cmd.get(`python ${file}`, 
+        // function(data, err, stderr) {
+        //     if(!err) {
+        //         console.log('working', data);
+        //     } else {
+        //         console.log('error', err);
+        //     }
+        // })
+        const childProcess = require('child_process');
+        childProcess.exec(`python ${file}`, function(err){
+            if (err) {
                 console.log('error', err);
             }
         })
