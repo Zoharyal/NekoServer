@@ -16,6 +16,7 @@
     "node-cmd": "^3.0.0",
     "nodemon": "^1.19.1",
     "path": "^0.12.7",
+    "python-shell": "^1.0.8",
     "socket.io": "^2.2.0"
   }
 }
