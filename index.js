@@ -23,7 +23,7 @@ app.use(cors({
     origin: '*'
 }));
 
-server = app.listen(8080, () => {
+server = app.listen(3080, () => {
     console.log('listening on 8080');
 });
 socket.initSocket(server);
@@ -33,7 +33,7 @@ const io = socket.getInstance();
 io.on('connection', function(socket) {
     console.log('connected');
     function runScript(script) {
-        return spawn('python', ["-u", path.join(__dirname, `/script/${script}`)]);
+        return spawn('python', ["-u", path.join(__dirname, `/script/${script}`), typeSon]);
     }
     //manger
     socket.on('eat', () => {
@@ -77,6 +77,7 @@ io.on('connection', function(socket) {
             console.log("Closed");
           });
     });
+
     // aller au toilette
     socket.on('toilet', () => {
         console.log('test toilet');
@@ -112,12 +113,12 @@ io.on('connection', function(socket) {
         subprocess.stdout.on('data', (data) => {
             console.log(`data:${data}`);
             });
-            subprocess.stderr.on('data', (data) => {
+          subprocess.stderr.on('data', (data) => {
             console.log(`error:${data}`);
-            });
-            subprocess.stderr.on('close', () => {
+          });
+          subprocess.stderr.on('close', () => {
             console.log("Closed");
-            });
+          });
     });
     // jouer
     socket.on('play', () => {
@@ -126,11 +127,116 @@ io.on('connection', function(socket) {
         subprocess.stdout.on('data', (data) => {
             console.log(`data:${data}`);
             });
-            subprocess.stderr.on('data', (data) => {
-            console.log(`error:${data}`);
-            });
-            subprocess.stderr.on('close', () => {
-            console.log("Closed");
-            });
+        subprocess.stderr.on('data', (data) => {
+          console.log(`error:${data}`);
+        });
+        subprocess.stderr.on('close', () => {
+          console.log("Closed");
+        });
+    });
+    // main qui bouge
+    socket.on('foot', () => {
+      console.log('test foot');
+      // to do nom de script
+      const subprocess = runScript('');
+      subprocess.stdout.on('data', (data) => {
+        console.log(`data:${data}`);
+        });
+      subprocess.stderr.on('data', (data) => {
+        console.log(`error:${data}`);
+      });
+      subprocess.stderr.on('close', () => {
+        console.log("Closed");
+      });
+    });
+    // ronflement 
+    socket.on('ronflement', () => {
+      console.log('test ronflement');
+      // to do nom de script
+      const subprocess = runScript('');
+      subprocess.stdout.on('data', (data) => {
+        console.log(`data:${data}`);
+        });
+      subprocess.stderr.on('data', (data) => {
+        console.log(`error:${data}`);
+      });
+      subprocess.stderr.on('close', () => {
+        console.log("Closed");
+      });
+    });
+    // cold
+    socket.on('cold', () => {
+      console.log('test cold');
+      // to do nom de script
+      const subprocess = runScript('');
+      subprocess.stdout.on('data', (data) => {
+        console.log(`data:${data}`);
+        });
+      subprocess.stderr.on('data', (data) => {
+        console.log(`error:${data}`);
+      });
+      subprocess.stderr.on('close', () => {
+        console.log("Closed");
+      });
+    });
+    // shower hot
+    socket.on('hot', () => {
+      console.log('test hot');
+      // to do nom de script + son
+      const subprocess = runScript('');
+      subprocess.stdout.on('data', (data) => {
+        console.log(`data:${data}`);
+        });
+      subprocess.stderr.on('data', (data) => {
+        console.log(`error:${data}`);
+      });
+      subprocess.stderr.on('close', () => {
+        console.log("Closed");
+      });
+    });
+    // perfect temperature
+    socket.on('perfect', () => {
+      console.log('test perfect');
+      // to do nom de script
+      const subprocess = runScript('');
+      subprocess.stdout.on('data', (data) => {
+        console.log(`data:${data}`);
+        });
+      subprocess.stderr.on('data', (data) => {
+        console.log(`error:${data}`);
+      });
+      subprocess.stderr.on('close', () => {
+        console.log("Closed");
+      });
+    });
+
+    socket.on('beer', () => {
+      console.log('test beer');
+      // to do nom de script + argument
+      const subprocess = runScript('');
+      subprocess.stdout.on('data', (data) => {
+        console.log(`data:${data}`);
+        });
+      subprocess.stderr.on('data', (data) => {
+        console.log(`error:${data}`);
+      });
+      subprocess.stderr.on('close', () => {
+        console.log("Closed");
+      });
+    });
+
+    socket.on('burger', () => {
+      console.log('test burger');
+      // to do nom de script + argument
+      const subprocess = runScript('test_var.py', 'testsimon');
+      subprocess.stdout.on('data', (data) => {
+        console.log(`data:${data}`);
+        });
+      subprocess.stderr.on('data', (data) => {
+        console.log(`error:${data}`);
+      });
+      subprocess.stderr.on('close', () => {
+        console.log("Closed");
+      });
     });
 });
