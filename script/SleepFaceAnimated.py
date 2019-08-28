@@ -4,10 +4,10 @@ import os
 from time import sleep
 from pydub import AudioSegment
 from pydub.playback import play
-fileName = os.path.abspath('script/sad.wav')
+fileName = os.path.abspath('script/snooze.wav')
 song = AudioSegment.from_wav(fileName)
 lcd = CharLCD('PCF8574', 0x27)
-loop = 0
+
 empty = (
     0b00000,
     0b00000,
@@ -151,8 +151,10 @@ def draw():
     lcd.write_string('\x00')
 
 def loop():
-    while(loop < 5):
+    loop = 0
 
+    while(loop < 3):
+        play(song)
         lcd.create_char(0, empty)
         lcd.create_char(1, lefttopcorner)
         lcd.create_char(2, righttopcorner)
@@ -165,6 +167,7 @@ def loop():
 
         draw()
         sleep(2)
+        play(song)
         lcd.create_char(0, empty)
         lcd.create_char(1, lefttopcorner)
         lcd.create_char(2, righttopcorner)
@@ -181,7 +184,6 @@ def loop():
         loop += 1
 
 try:
-    play(song)
     loop()
 except KeyboardInterrupt:
     destroy()

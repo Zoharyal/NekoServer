@@ -14,7 +14,7 @@ class AngryFace:
         ledRedPin = 13      #define 3 pins of RGBLED
         ledGreenPin = 16
         ledBluePin = 37
-        fileName = os.path.abspath('script/ecole.wav')
+        fileName = os.path.abspath('script/alcool.wav')
         song = AudioSegment.from_wav(fileName)
         global p_Red,p_Green,p_Blue
         GPIO.setmode(GPIO.BOARD)

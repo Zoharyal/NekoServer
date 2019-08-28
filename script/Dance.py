@@ -4,8 +4,11 @@
 from RPLCD.i2c import CharLCD
 import RPi.GPIO as GPIO
 import time
+import os
 from time import sleep
 import smbus
+from pydub import AudioSegment
+from pydub.playback import play
 
 class Dance:
     def draw():
@@ -17,6 +20,8 @@ class Dance:
         ledGreenPin = 16
         ledBluePin = 22
         loop = 0
+        fileName = os.path.abspath('script/danser.wav')
+        song = AudioSegment.from_wav(fileName)
         global p_Red,p_Green,p_Blue,p
         GPIO.setmode(GPIO.BOARD)
         def destroy():
@@ -174,7 +179,7 @@ class Dance:
         lcd.write_string('\x04')
         lcd.write_string('\x00')
         lcd.write_string('\x00')
-
+        play(song)
         while (loop<6):
             for dc in range(90, 181, 1):   #make servo rotate from 0 to 180 deg
                 servoWrite(dc)     # Write to servo
