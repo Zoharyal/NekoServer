@@ -23,7 +23,7 @@ app.use(cors({
     origin: '*'
 }));
 
-server = app.listen(3080, () => {
+server = app.listen(8080, () => {
     console.log('listening on 8080');
 });
 socket.initSocket(server);
@@ -32,22 +32,58 @@ const io = socket.getInstance();
 
 io.on('connection', function(socket) {
     console.log('connected');
-    function runScript(script) {
+    function runScript(script, typeSon) {
+        console.log('typeSon', typeSon);
         return spawn('python', ["-u", path.join(__dirname, `/script/${script}`), typeSon]);
     }
+
+    function runPersistentScript(bActiv = true) {
+      let subprocess;
+      while (bActiv) {
+        subprocess = runScript('Feed.py');
+        subprocess.stdout.on('data', (data) => {
+            console.log(`data:${data}`);
+          });
+        subprocess.stderr.on('data', (data) => {
+          console.log(`error:${data}`);
+        });
+        subprocess.stderr.on('close', () => {
+          console.log("Closed");
+        });
+      }
+    }
+    runPersistentScript();
     //manger
     socket.on('eat', () => {
         console.log('test eat');
+        runPersistentScript(false);
         const subprocess = runScript('Feed.py');
         subprocess.stdout.on('data', (data) => {
             console.log(`data:${data}`);
           });
-          subprocess.stderr.on('data', (data) => {
-            console.log(`error:${data}`);
-          });
-          subprocess.stderr.on('close', () => {
-            console.log("Closed");
-          });
+        subprocess.stderr.on('data', (data) => {
+          console.log(`error:${data}`);
+        });
+        subprocess.stderr.on('close', () => {
+          console.log("Closed");
+          runPersistentScript(true);
+        });
+    });
+    // capteur rfid
+    socket.on('badge', () => {
+      console.log('test badge');
+      runPersistentScript(false);
+      const subprocess = runScript('Feed.py');
+      subprocess.stdout.on('data', (data) => {
+          console.log(`data:${data}`);
+        });
+      subprocess.stderr.on('data', (data) => {
+        console.log(`error:${data}`);
+      });
+      subprocess.stderr.on('close', () => {
+        console.log("Closed");
+        runPersistentScript(true);
+      });
     });
     // dormir
     socket.on('sleep', () => {
