@@ -111,7 +111,6 @@ io.on('connection', function(socket) {
     // aller au toilette
     socket.on('toilet', () => {
         console.log('test toilet');
-        runPersistentScript(false);
         const subprocess = runScript('HappyFaceAnimated.py');
         subprocess.stdout.on('data', (data) => {
             console.log(`data:${data}`);
@@ -121,7 +120,6 @@ io.on('connection', function(socket) {
           });
           subprocess.stderr.on('close', () => {
             console.log("Closed");
-            runPersistentScript(true);
           });
     });
     // se réveiller
