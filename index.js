@@ -33,30 +33,27 @@ const io = socket.getInstance();
 io.on('connection', function(socket) {
     console.log('connected');
     function runScript(script, typeSon) {
-        console.log('typeSon', typeSon);
         return spawn('python', ["-u", path.join(__dirname, `/script/${script}`), typeSon]);
     }
 
-    function runPersistentScript(bActiv = true) {
-      let subprocess;
-      while (bActiv) {
-        subprocess = runScript('Iddle.py');
-        subprocess.stdout.on('data', (data) => {
-            console.log(`data:${data}`);
-          });
-        subprocess.stderr.on('data', (data) => {
-          console.log(`error:${data}`);
-        });
-        subprocess.stderr.on('close', () => {
-          console.log("Closed");
-        });
-      }
-    }
-    runPersistentScript();
+    // function runPersistentScript(bActiv = true) {
+    //   while (bActiv) {
+    //     const subprocess = runScript('Iddle.py');
+    //     subprocess.stdout.on('data', (data) => {
+    //         console.log(`data:${data}`);
+    //       });
+    //     subprocess.stderr.on('data', (data) => {
+    //       console.log(`error:${data}`);
+    //     });
+    //     subprocess.stderr.on('close', () => {
+    //       console.log("Closed");
+    //     });
+    //   }
+    // }
+    // runPersistentScript();
     //manger
     socket.on('eat', () => {
         console.log('test eat');
-        runPersistentScript(false);
         const subprocess = runScript('Feed.py', 'eat');
         subprocess.stdout.on('data', (data) => {
             console.log(`data:${data}`);
@@ -66,13 +63,11 @@ io.on('connection', function(socket) {
         });
         subprocess.stderr.on('close', () => {
           console.log("Closed");
-          runPersistentScript(true);
         });
     });
     // capteur rfid
     socket.on('badge', () => {
       console.log('test badge');
-      runPersistentScript(false);
       const subprocess = runScript('Read.py');
       subprocess.stdout.on('data', (data) => {
           console.log(`data:${data}`);
@@ -82,13 +77,11 @@ io.on('connection', function(socket) {
       });
       subprocess.stderr.on('close', () => {
         console.log("Closed");
-        runPersistentScript(true);
       });
     });
     // dormir
     socket.on('sleep', () => {
         console.log('test sleep');
-        runPersistentScript(false);
         const subprocess = runScript('SleepFaceAnimated.py');
         subprocess.stdout.on('data', (data) => {
             console.log(`data:${data}`);
@@ -98,7 +91,6 @@ io.on('connection', function(socket) {
           });
           subprocess.stderr.on('close', () => {
             console.log("Closed");
-            runPersistentScript(true);
           });
     });
     // se laver

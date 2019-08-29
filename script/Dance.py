@@ -4,9 +4,9 @@
 from RPLCD.i2c import CharLCD
 import RPi.GPIO as GPIO
 import time
-import os
 from time import sleep
 import smbus
+import os
 from pydub import AudioSegment
 from pydub.playback import play
 

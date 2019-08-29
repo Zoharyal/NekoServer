@@ -1,15 +1,15 @@
 from RPLCD.i2c import CharLCD
 import time
-import os
 import RPi.GPIO as GPIO
 from time import sleep
+import os
 from pydub import AudioSegment
 from pydub.playback import play
 lcd = CharLCD('PCF8574', 0x27)
 ledRedPin = 13      #define 3 pins of RGBLED
 ledGreenPin = 16
 ledBluePin = 37
-fileName = os.path.abspath('script/faidubien.wav')
+fileName = os.path.abspath('script/faitdubien.wav')
 song = AudioSegment.from_wav(fileName)
 global p_Red,p_Green,p_Blue
 GPIO.setmode(GPIO.BOARD)

@@ -1,7 +1,7 @@
 from RPLCD.i2c import CharLCD
 import time
-import os
 from time import sleep
+import os
 from pydub import AudioSegment
 from pydub.playback import play
 fileName = os.path.abspath('script/envoieleballon.wav')

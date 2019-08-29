@@ -1,8 +1,8 @@
 from RPLCD.i2c import CharLCD
 import time
-import os
 import RPi.GPIO as GPIO
 from time import sleep
+import os
 from pydub import AudioSegment
 from pydub.playback import play
 lcd = CharLCD('PCF8574', 0x27)

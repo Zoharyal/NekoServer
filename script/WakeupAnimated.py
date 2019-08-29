@@ -2,9 +2,9 @@
 # -*- coding: utf8 -*-
 
 from RPLCD.i2c import CharLCD
-import os
 from time import sleep
 from pydub import AudioSegment
+import os
 from pydub.playback import play
 
 class WakeupAnimated:

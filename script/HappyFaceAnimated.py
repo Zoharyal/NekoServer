@@ -4,8 +4,8 @@
 from RPLCD.i2c import CharLCD
 import RPi.GPIO as GPIO
 import time
-import os
 from time import sleep
+import os
 import smbus
 from pydub import AudioSegment
 from pydub.playback import play
@@ -15,7 +15,7 @@ class HappyFaceAnimated:
         ledRedPin = 13      #define 3 pins of RGBLED
         ledGreenPin = 16
         ledBluePin = 37
-        fileName = os.path.abspath('script/happy.wav')
+        fileName = os.path.abspath('script/faidubien.wav')
         song = AudioSegment.from_wav(fileName)
         global p_Red,p_Green,p_Blue
         GPIO.setmode(GPIO.BOARD)
