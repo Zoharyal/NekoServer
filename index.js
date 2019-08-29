@@ -54,7 +54,7 @@ io.on('connection', function(socket) {
     //manger
     socket.on('eat', () => {
         console.log('test eat');
-        const subprocess = runScript('Feed.py', 'eat');
+        const subprocess = runScript('Eatting.py', 'eat');
         subprocess.stdout.on('data', (data) => {
             console.log(`data:${data}`);
           });
@@ -199,54 +199,48 @@ io.on('connection', function(socket) {
     // cold
     socket.on('cold', () => {
       console.log('test cold');
-      setInterval(() => {
-        const subprocess = runScript('ColdShower.py');
-        subprocess.stdout.on('data', (data) => {
-          console.log(`data:${data}`);
-          });
-        subprocess.stderr.on('data', (data) => {
-          console.log(`error:${data}`);
+      const subprocess = runScript('ColdShower.py');
+      subprocess.stdout.on('data', (data) => {
+        console.log(`data:${data}`);
         });
-        subprocess.stderr.on('close', () => {
-          console.log("Closed");
-        });
-      }, 3000);
+      subprocess.stderr.on('data', (data) => {
+        console.log(`error:${data}`);
+      });
+      subprocess.stderr.on('close', () => {
+        console.log("Closed");
+      });
     });
 
     // shower hot
     socket.on('hot', () => {
       console.log('test hot');
       // to do nom de script + son
-      setInterval(() => {
-        const subprocess = runScript('HotShower.py');
-        subprocess.stdout.on('data', (data) => {
-          console.log(`data:${data}`);
-          });
-        subprocess.stderr.on('data', (data) => {
-          console.log(`error:${data}`);
+      const subprocess = runScript('HotShower.py');
+      subprocess.stdout.on('data', (data) => {
+        console.log(`data:${data}`);
         });
-        subprocess.stderr.on('close', () => {
-          console.log("Closed");
-        });
-      }, 3000);
+      subprocess.stderr.on('data', (data) => {
+        console.log(`error:${data}`);
+      });
+      subprocess.stderr.on('close', () => {
+        console.log("Closed");
+      });
     });
 
     // perfect temperature
     socket.on('perfect', () => {
       console.log('test perfect');
       // to do nom de script
-      setInterval(() => {
-        const subprocess = runScript('GoodShower.py');
-        subprocess.stdout.on('data', (data) => {
-          console.log(`data:${data}`);
-          });
-        subprocess.stderr.on('data', (data) => {
-          console.log(`error:${data}`);
+      const subprocess = runScript('GoodShower.py');
+      subprocess.stdout.on('data', (data) => {
+        console.log(`data:${data}`);
         });
-        subprocess.stderr.on('close', () => {
-          console.log("Closed");
-        });
-      }, 3000);
+      subprocess.stderr.on('data', (data) => {
+        console.log(`error:${data}`);
+      });
+      subprocess.stderr.on('close', () => {
+        console.log("Closed");
+      });
     });
 
 

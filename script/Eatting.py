@@ -12,8 +12,7 @@ from pydub.playback import play
 
 
 def loop():
-    #food = sys.argv[1]
-    food = 'burger'
+    food = sys.argv[1]
     ledRedPin = 13      #define 3 pins of RGBLED
     ledGreenPin = 16
     ledBluePin = 37
