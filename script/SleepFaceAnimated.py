@@ -150,40 +150,34 @@ def draw():
     lcd.write_string('\x00')
     lcd.write_string('\x00')
 
-def loop():
-    loop = 0
+def sleeping():
+    play(song)
+    lcd.create_char(0, empty)
+    lcd.create_char(1, lefttopcorner)
+    lcd.create_char(2, righttopcorner)
 
-    while(loop < 2):
-        play(song)
-        lcd.create_char(0, empty)
-        lcd.create_char(1, lefttopcorner)
-        lcd.create_char(2, righttopcorner)
+    lcd.create_char(3, rightbottomcorner)
+    lcd.create_char(4, leftbottomcorner)
 
-        lcd.create_char(3, rightbottomcorner)
-        lcd.create_char(4, leftbottomcorner)
+    lcd.create_char(5, mouthleftopen)
+    lcd.create_char(6, mouthrightopen)
 
-        lcd.create_char(5, mouthleftopen)
-        lcd.create_char(6, mouthrightopen)
+    draw()
+    sleep(2)
+    play(song)
+    lcd.create_char(0, empty)
+    lcd.create_char(1, lefttopcorner)
+    lcd.create_char(2, righttopcorner)
 
-        draw()
-        sleep(2)
-        play(song)
-        lcd.create_char(0, empty)
-        lcd.create_char(1, lefttopcorner)
-        lcd.create_char(2, righttopcorner)
+    lcd.create_char(3, rightbottomcorner)
+    lcd.create_char(4, leftbottomcorner)
 
-        lcd.create_char(3, rightbottomcorner)
-        lcd.create_char(4, leftbottomcorner)
+    lcd.create_char(5, mouthleftclose)
+    lcd.create_char(6, mouthrightclose)
 
-        lcd.create_char(5, mouthleftclose)
-        lcd.create_char(6, mouthrightclose)
-
-        draw()
-        sleep(2)
-        destroy()
-        loop += 1
-
+    draw()
+    sleep(2)
 try:
-    loop()
+    sleeping()
 except KeyboardInterrupt:
     destroy()

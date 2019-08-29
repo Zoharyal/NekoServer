@@ -225,6 +225,7 @@ class WakeupAnimated:
         lcd.create_char(5, middletopclose)
         lcd.create_char(6, middlebottomclose)
         drawclose()
+        sleep(1)
         play(song)
         destroy()
         lcd.create_char(0, empty)
