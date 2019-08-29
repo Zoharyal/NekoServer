@@ -112,7 +112,7 @@ io.on('connection', function(socket) {
     socket.on('toilet', () => {
         console.log('test toilet');
         runPersistentScript(false);
-        const subprocess = runScript('HappyFaceAnimated.py');
+        const subprocess = runScript('HappyPlusheen.py');
         subprocess.stdout.on('data', (data) => {
             console.log(`data:${data}`);
           });

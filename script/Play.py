@@ -139,7 +139,7 @@ try:
     lcd.create_char(6, rightbottomcorner)
     draw()
     play(song)
-    sleep(5)
+    sleep(3)
     destroy()
 except KeyboardInterrupt:
     destroy()

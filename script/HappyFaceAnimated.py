@@ -15,7 +15,7 @@ class HappyFaceAnimated:
         ledRedPin = 13      #define 3 pins of RGBLED
         ledGreenPin = 16
         ledBluePin = 37
-        fileName = os.path.abspath('script/faidubien.wav')
+        fileName = os.path.abspath('scrip/faitdubien.wav')
         song = AudioSegment.from_wav(fileName)
         global p_Red,p_Green,p_Blue
         GPIO.setmode(GPIO.BOARD)
@@ -200,7 +200,7 @@ class HappyFaceAnimated:
         p_Green.ChangeDutyCycle(100)
         p_Blue.ChangeDutyCycle(100)
         play(song)
-        while(looping < 5):
+        while(looping < 2):
             lcd.create_char(0, empty)
             lcd.create_char(1, lefttopcorner)
             lcd.create_char(2, righttopcorner)

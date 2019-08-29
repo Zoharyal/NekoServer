@@ -160,5 +160,5 @@ class AngryFace:
         lcd.write_string('\x00')
         lcd.write_string('\x00')
 
-        sleep(8)
+        sleep(4)
         destroy()

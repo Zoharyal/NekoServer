@@ -5,7 +5,6 @@ from time import sleep
 import os
 from pydub import AudioSegment
 from pydub.playback import play
-song = AudioSegment.from_wav("sad.wav")
 lcd = CharLCD('PCF8574', 0x27)
 ledRedPin = 13      #define 3 pins of RGBLED
 ledGreenPin = 16
@@ -160,7 +159,7 @@ try:
     lcd.create_char(6, mouthleft)
     play(song)
     draw()
-    sleep(5)
+    sleep(3)
     destroy()
 except KeyboardInterrupt:
     destroy()

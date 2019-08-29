@@ -204,7 +204,7 @@ def loop():
     p_Green.ChangeDutyCycle(100)
     p_Blue.ChangeDutyCycle(100)
     play(song)
-    while(looping < 5):
+    while(looping < 2):
         lcd.create_char(0, empty)
         lcd.create_char(1, lefttopcorner)
         lcd.create_char(2, righttopcorner)

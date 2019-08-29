@@ -237,6 +237,6 @@ class WakeupAnimated:
         lcd.create_char(5, middletopopen)
         lcd.create_char(6, middlebottomopen)
         drawopen()
-        sleep(4)
+        sleep(3)
         destroy()
         GPIO.cleanup()
